@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
+import csv
 
 
 ############################ DEFINING THE TRAINNING MODEL #######################################
@@ -340,7 +341,7 @@ plot_histogram(data_x, data_x.columns)
 
 ############################ MODEL TRAINNING AND TESTING #########################################
 
-parameters = L_layer_model(x_train, y_train, layers_dims = (5, 30, 35,4),learning_rate=0.006, num_iterations = 30000,lambd=0.1, print_cost=True)
+parameters = L_layer_model(x_train, y_train, layers_dims = (5, 30, 35,4),learning_rate=0.003, num_iterations = 50000,lambd=0.1, print_cost=True)
 predict_y_train = L_model_forward_test(x_train, parameters)
 predict_y_test = L_model_forward_test(x_test, parameters)
 accuracy_train,LS_error_train = predict_accuracy (predict_y_train,y_train)
@@ -351,4 +352,13 @@ print("Test Set Accuracy: " + str(round(accuracy_test,2))+"%")
 print("Test Set Least Square Error: " + str(LS_error_test))
 
 
-#
+############################## WRITING PARAMETERS TRAINED TO CSV FILE###############################
+myData = parameters
+with open('C:/Users/esther/source/repos/Python Models/parameters.csv','w') as csv_file:
+    writer = csv.writer(csv_file)
+    for key, value in myData.items():
+       writer.writerow([key, value])
+print("Writing parameters complete.")
+
+
+###
