@@ -18,12 +18,12 @@ def meanNormalization (Xraw):
     n=Xraw.shape[0]
     u=1/m*Xraw.sum(axis=1)
     u=u.reshape((n,1))
-    max=Xraw.max(axis=1)
-    max=max.reshape((n,1))
-    min=Xraw.min(axis=1)
-    min=min.reshape((n,1))
-    Xnorm=(Xraw-u)/(max-min)
-    return Xnorm 
+    xmax=Xraw.max(axis=1)
+    xmax=xmax.reshape((n,1))
+    xmin=Xraw.min(axis=1)
+    xmin=xmin.reshape((n,1))
+    Xnorm=(Xraw-u)/(xmax-xmin)
+    return Xnorm
 
 ### initialize_parameters_deep 
 def initialize_parameters_deep(layer_dims): 
@@ -339,7 +339,7 @@ def plot_histogram(data_x, cols, bins = 10):
 plot_histogram(data_x, data_x.columns)
 """
 
-############################ MODEL TRAINNING AND TESTING #########################################
+############################ MODEL TRAINNING AND TESTING ########################################
 
 parameters = L_layer_model(x_train, y_train, layers_dims = (5, 30, 35,4),learning_rate=0.003, num_iterations = 50000,lambd=0.1, print_cost=True)
 predict_y_train = L_model_forward_test(x_train, parameters)
@@ -352,7 +352,7 @@ print("Test Set Accuracy: " + str(round(accuracy_test,2))+"%")
 print("Test Set Least Square Error: " + str(LS_error_test))
 
 
-############################## WRITING PARAMETERS TRAINED TO CSV FILE###############################
+############################## WRITING PARAMETERS TRAINED TO CSV FILE#############################
 myData = parameters
 with open('C:/Users/esther/source/repos/Python Models/parameters.csv','w') as csv_file:
     writer = csv.writer(csv_file)
