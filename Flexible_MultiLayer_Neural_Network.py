@@ -183,7 +183,7 @@ def L_model_backward(AL, Y, caches):
  
     # Lth layer (linearOutput -> LINEAR) gradients. 
     #Inputs: "dAL, current_cache". Outputs: "grads["dAL-1"], grads["dWL"], grads["dbL"]
-    current_cache = caches[L-1]                          # caches[L-1]: A(L-1), w(L), b(L), Z(L)
+    current_cache = caches[L-1]      # caches[L-1]: A(L-1), w(L), b(L), Z(L)
     grads["dA" + str(L-1)], grads["dW" + str(L)], grads["db" + str(L)] = linear_activation_backward(dAL, current_cache,"linearOutput")
      
     # Loop from l=L-2 to l=0
@@ -310,9 +310,9 @@ def predict_accuracy (predict,Y):
 ########################### READ DATA FROM EXCEL and PREPROCESSING DATA ########################
 ### Read Data from Excel file 
 xls = pd.ExcelFile('/Users/esther/source/repos/Python Models/RawData.xlsx')
-data_x = pd.read_excel(xls,'Inputs', header=0)
+data_x = pd.read_excel(xls, 'Inputs')
 data_x_array = data_x.values
-data_y = pd.read_excel(xls,'Outputs', header=0)
+data_y = pd.read_excel(xls, 'Outputs')
 data_y_array = data_y.values
 
 ### Splitting and Scaling Data
@@ -324,9 +324,8 @@ y_test  = Y_test.T
 
 
 ########################### DATA VISUALISING ###################################################
+# loop through: 'Dimensions_in', 'Flow_rate_in', 'Pressure_in ', 'Power_in', 'Temperature_in'  
 
-# Need to delete 'header=0' to loop through: 'Dimensions_in', 'Flow_rate_in', 'Pressure_in ', 'Power_in', 'Temperature_in'  
-"""
 print(data_x.describe())
 
 def plot_histogram(data_x, cols, bins = 10):
@@ -339,11 +338,11 @@ def plot_histogram(data_x, cols, bins = 10):
         ax.set_ylabel('Number of ')
         plt.show() 
 plot_histogram(data_x, data_x.columns)
-"""
+
 
 ############################ MODEL TRAINNING AND TESTING ########################################
 
-parameters = L_layer_model(x_train, y_train, layers_dims = (5, 30, 30, 4),learning_rate=0.0028, num_iterations = 150000,lambd=0.1, print_cost=True)
+parameters = L_layer_model(x_train, y_train, layers_dims = (5, 30, 30, 4),learning_rate=0.0029, num_iterations=150000, lambd=0.1, print_cost=True)
 predict_y_train = L_model_forward_test(x_train, parameters)
 predict_y_test = L_model_forward_test(x_test, parameters)
 accuracy_train,LS_error_train = predict_accuracy (predict_y_train,y_train)
