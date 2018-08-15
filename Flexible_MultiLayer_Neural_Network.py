@@ -343,7 +343,7 @@ plot_histogram(data_x, data_x.columns)
 
 ############################ MODEL TRAINNING AND TESTING ########################################
 
-parameters = L_layer_model(x_train, y_train, layers_dims = (5, 30, 35,4),learning_rate=0.003, num_iterations = 50000,lambd=0.1, print_cost=True)
+parameters = L_layer_model(x_train, y_train, layers_dims = (5, 30, 30, 4),learning_rate=0.0028, num_iterations = 150000,lambd=0.1, print_cost=True)
 predict_y_train = L_model_forward_test(x_train, parameters)
 predict_y_test = L_model_forward_test(x_test, parameters)
 accuracy_train,LS_error_train = predict_accuracy (predict_y_train,y_train)
