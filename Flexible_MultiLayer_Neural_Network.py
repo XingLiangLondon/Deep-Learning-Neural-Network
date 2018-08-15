@@ -311,9 +311,9 @@ def predict_accuracy (predict,Y):
 ### Read Data from Excel file 
 xls = pd.ExcelFile('/Users/esther/source/repos/Python Models/RawData.xlsx')
 data_x = pd.read_excel(xls,'Inputs', header=0)
-data_x_array = data_x.as_matrix()
+data_x_array = data_x.values
 data_y = pd.read_excel(xls,'Outputs', header=0)
-data_y_array = data_y.as_matrix()
+data_y_array = data_y.values
 
 ### Splitting and Scaling Data
 X_train, X_test, Y_train, Y_test= train_test_split(data_x_array,data_y_array, test_size=0.3)
@@ -327,14 +327,16 @@ y_test  = Y_test.T
 
 # Need to delete 'header=0' to loop through: 'Dimensions_in', 'Flow_rate_in', 'Pressure_in ', 'Power_in', 'Temperature_in'  
 """
+print(data_x.describe())
+
 def plot_histogram(data_x, cols, bins = 10):
     for col in cols:
-        fig = plt.figure(figsize=(6,6)) # define plot area
-        ax = fig.gca() # define axis    
+        fig = plt.figure(figsize=(6,6)) 
+        ax = fig.gca()     
         data_x[col].plot.hist(ax = ax, bins = bins) 
         ax.set_title('Histogram of ' + col) 
         ax.set_xlabel(col) 
-        ax.set_ylabel('Number of autos')
+        ax.set_ylabel('Number of ')
         plt.show() 
 plot_histogram(data_x, data_x.columns)
 """
