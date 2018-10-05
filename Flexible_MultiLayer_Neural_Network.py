@@ -362,4 +362,30 @@ with open('C:/Users/esther/source/repos/Python Models/parameters.csv','w') as cs
 print("Writing parameters complete.")
 
 
+############################### PLOT GRAPH ON Y_Predicted VS. Y_Groundtruth  ######################
+plt.scatter(np.squeeze(y_test[:1,0:]),np.squeeze(predict_y_test[:1,0:]), c='r', marker='o')
+plt.ylabel('Predicted')
+plt.xlabel('Ground Truth')
+plt.title("Compare Predicted and Ground Truth Data on Outlet Pressure")
+plt.show()
+
+plt.scatter(np.squeeze(y_test[1:2,0:]),np.squeeze(predict_y_test[1:2,0:]), c='g', marker='+')
+plt.ylabel('Predicted')
+plt.xlabel('Ground Truth')
+plt.title("Compare Predicted and Ground Truth Data on Outlet Temperature")
+plt.show()
+
+plt.scatter(np.squeeze(y_test[2:3,0:]),np.squeeze(predict_y_test[2:3,0:]), c='blue', marker='*')
+plt.ylabel('Predicted')
+plt.xlabel('Ground Truth')
+plt.title("Compare Predicted and Ground Truth Data on Wall Temperature One")
+plt.show()  
+
+plt.scatter(np.squeeze(y_test[3:,0:]),np.squeeze(predict_y_test[3:,0:]), c='purple', marker='#')
+plt.ylabel('Predicted')
+plt.xlabel('Ground Truth')
+plt.title("Compare Predicted and Ground Truth Data on Wall Temperature Two")
+plt.show()  
+
+
 ###
